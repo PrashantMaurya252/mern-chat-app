@@ -73,5 +73,11 @@ export const loginUser = async (req, res) => {
 };
 
 export const logoutUser = (req, res) => {
-  console.log("Logout User");
+  try {
+    res.cookie("jwt","",{maxAge:0});
+    res.status(200).json({message:"Logged Out Successfully"})
+  } catch (error) {
+    console.log("Error in Logout controller",error);
+    res.status(500).json({error:"Interval Server Error"})
+  }
 };
